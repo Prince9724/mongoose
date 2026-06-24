@@ -22,11 +22,15 @@ export const addBook =async(req,res)=>{
             error:err.message});
     }
 }
-const   getBook = async()=>{
+ export const getBook = async(req,res)=>{
     try{
-        const result = await book.find({
-            
+        const result = await book.find()
+        res.json({
+            status:true,
+            message:"book fetching succesfully ! "
+            ,data:result
         })
+
     }
     catch(err){
         res.status(404).json({
