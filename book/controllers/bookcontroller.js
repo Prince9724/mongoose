@@ -52,7 +52,7 @@ export const testing =(req,res)=>{
     });
 }
 
-export const updateBook = async()=>{
+export const updateBook = async(req,res)=>{
     try{
      const result = await book.findByIdAndUpdate(req.body.id,req.body);
         res.json({
@@ -65,6 +65,23 @@ export const updateBook = async()=>{
         res.json({
             status:false,
             message:"book udation failed !",
+            err:err.message
+        })
+    }
+}
+export const deleteBook = async(req,res)=>{
+    try{
+       const result = await book.findByIdAndDelete(req.query.id);
+        res.json({
+            status:true,
+            message:"book deleted succefully !",
+            data:result
+        })
+    }
+    catch (err){
+        res.json({
+            status:false,
+            message:"book delete failed !!",
             err:err.message
         })
     }
