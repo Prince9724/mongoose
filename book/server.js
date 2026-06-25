@@ -6,7 +6,7 @@ import route from './routes/bookroutes.js'
 const app = express();
 app.use(express.json());// middleware -> its validate request before sending to the server 
 connectdb();    
-app.use("/",route);
+app.use("/api/book",route);
 
 app.listen(5000, ()=>{
     console.log("server started successfully !! ");
