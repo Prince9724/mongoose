@@ -5,7 +5,7 @@ import { checkTime } from "../../Customer-managment/middleware/logger.js";
 const router = express.Router();
 
 router.post("/",addBook);
-router.get("/",checkTime,getBook);
+router.get("/" ,getBook);
 router.put("/",updateBook);
 router.delete("/",deleteBook);
 // router.get("/test/:id",testing)//url me jo number pass kiya hai vo id parameter ke ander gya hai jo bookcontroller ke ander pass hua hai.
