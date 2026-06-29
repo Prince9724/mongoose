@@ -44,7 +44,7 @@ export const updateCustomer = async (req, res)=>{
     res.json({
         status:true,
         message:"customer updation succesfully !!",
-        data:result
+        data:result  
     })
    }
    catch(err){
