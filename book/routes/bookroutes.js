@@ -1,10 +1,11 @@
 import express from "express";
 import { addBook, deleteBook, getBook, testing, updateBook } from "../controllers/bookcontroller.js";
+import { checkTime } from "../../Customer-managment/middleware/logger.js";
 
 const router = express.Router();
 
 router.post("/",addBook);
-router.get("/",getBook);
+router.get("/",checkTime,getBook);
 router.put("/",updateBook);
 router.delete("/",deleteBook);
 // router.get("/test/:id",testing)//url me jo number pass kiya hai vo id parameter ke ander gya hai jo bookcontroller ke ander pass hua hai.
