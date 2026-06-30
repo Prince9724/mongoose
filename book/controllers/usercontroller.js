@@ -18,6 +18,19 @@ export const signUp = async(req , res)=>{
     }
 }
 
-export const signIn = ()=>{
-
+export const signIn = async(req, res)=>{
+    const {email, password} = req.body //puri body dono variable ke ander store kr diya hai 
+    const userData =  await user.findOne({email});
+    if(!userData){
+        res.json({
+        status:false , 
+        message:"user not found ! ",
+    })
+    }
+   
+    res.json({
+        status:true , 
+        message:"signIn Succesfully !!",
+        userData
+    })
 }
