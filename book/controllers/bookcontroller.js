@@ -54,7 +54,7 @@ export const testing =(req,res)=>{
 
 export const updateBook = async(req,res)=>{
     try{
-     const result = await book.findByIdAndUpdate(req.body.id,req.body);
+     const result = await book.findByIdAndUpdate(req.body._id,req.body);
         res.json({
             status:true,
             message:"book updation succesfully !!",
