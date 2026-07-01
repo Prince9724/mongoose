@@ -1,12 +1,13 @@
 import axios from 'axios';
 import React, { useState } from 'react'
-
+import { useNavigate } from 'react-router';
 const Auth = () => {
     const [user, setuser]= useState({});
     const [signin, setsignin] = useState({});
     const getName = (e)=> setuser({...user ,name:e.target.value});
     const getEmail = (e)=> setuser({...user ,email:e.target.value});
     const getPassword = (e)=> setuser({...user ,password:e.target.value});
+    const navigate = useNavigate();    
     //signin================
 
     const checkEmail = (e)=>setsignin({...signin, email:e.target.value})
@@ -32,6 +33,7 @@ const clear = ()=>{
         const res = await axios.post("http://localhost:5000/api/book/signin",signin);
         if(res.data.status){
             alert(res.data.message)
+            navigate("/home")
 
         }
         else(

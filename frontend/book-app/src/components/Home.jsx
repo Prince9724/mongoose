@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react'
+import React, { useEffect} from 'react'
 import axios from "axios"
 import { useState } from 'react'
+import { useNavigate } from 'react-router'
 const Home = () => {
     const [books, setBooks] = useState([]);
     const [book, setbook] = useState({
@@ -10,6 +11,7 @@ const Home = () => {
         cartogary: "",
         publishYear: ""
     });
+    const navigate = useNavigate();
     const handleFilled = (x) => setbook(x)//isliye bnaya ki jab bhi user edit pr click krega to vo data input filed me aa jaayega.
 
     const handleFetchBook = async () => {
@@ -21,7 +23,8 @@ const Home = () => {
         const res = await axios.post("http://localhost:5000/api/book", book);
         if (res.status == 201) {
             alert(res.data.message);
-            handleFetchBook(); // refresh ke liye 
+            handleFetchBook(); // refresh ke liye
+             
         setbook({ title: "", auther: "", price: "", cartogary: "", publishYear: "",image:"" });
 
         }

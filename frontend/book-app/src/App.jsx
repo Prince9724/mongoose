@@ -13,7 +13,6 @@ const App = () => {
         <Route path='home'element={<Home/>}  />
       </Routes>
 
-      <Auth/>
     </div>
   )
 }
