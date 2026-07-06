@@ -1,5 +1,5 @@
-import mogoose from 'mongooose';
-const url = "mongodb://127.0.0.1:27017/authentcation";
+import mongoose from 'mongoose';
+const url = "mongodb://127.0.0.1:27017/authentication";
  const connectdb = async ()=>{
     try{
     await mongoose.connect(url);

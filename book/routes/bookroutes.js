@@ -2,13 +2,14 @@ import express from "express";
 import { addBook, deleteBook, getBook, testing, updateBook } from "../controllers/bookcontroller.js";
 import { checkTime } from "../../Customer-managment/middleware/logger.js";
 import { signIn, signUp } from "../controllers/usercontroller.js";
+import { checkAuthentication } from "../middleware/logger.js";
 
 const router = express.Router();
     //book Routes============
-router.post("/",addBook);
-router.get("/" ,getBook);
-router.put("/",updateBook);
-router.delete("/",deleteBook);
+router.post("/",checkAuthentication,addBook);
+router.get("/" ,checkAuthentication,getBook);
+router.put("/",checkAuthentication,updateBook);
+router.delete("/",checkAuthentication,deleteBook);
 //=============
 //userRoutes
 

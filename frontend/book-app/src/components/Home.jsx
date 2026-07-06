@@ -1,4 +1,4 @@
-import React, { useEffect} from 'react'
+import React, { useEffect } from 'react'
 import axios from "axios"
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
@@ -15,17 +15,24 @@ const Home = () => {
     const handleFilled = (x) => setbook(x)//isliye bnaya ki jab bhi user edit pr click krega to vo data input filed me aa jaayega.
 
     const handleFetchBook = async () => {
-        const res = await axios.get("http://localhost:5000/api/book");
+        const res = await axios.get("http://localhost:5000/api/book", {
+            withCredentials: true
+        });
+        console.log("Response:", res.data);
+        console.log("Data:", res.data.data);
         setBooks(res.data.data);
     }
 
     const handlePostBook = async () => {
-        const res = await axios.post("http://localhost:5000/api/book", book);
+        const res = await axios.post("http://localhost:5000/api/book", book,
+            {
+                withCredentials: true
+            });
         if (res.status == 201) {
             alert(res.data.message);
             handleFetchBook(); // refresh ke liye
-             
-        setbook({ title: "", auther: "", price: "", cartogary: "", publishYear: "",image:"" });
+
+            setbook({ title: "", auther: "", price: "", cartogary: "", publishYear: "", image: "" });
 
         }
         else {
@@ -35,7 +42,10 @@ const Home = () => {
     }
 
     const deleteBook = async (id) => {
-        const res = await axios.delete("http://localhost:5000/api/book?id=" + id);
+        const res = await axios.delete("http://localhost:5000/api/book?id=" + id,
+            {
+                withCredentials: true
+            });
         handleFetchBook();
     }
 
@@ -44,10 +54,13 @@ const Home = () => {
             alert("please click edit button in any book !!");
             return;
         }
-        const res = await axios.put("http://localhost:5000/api/book", book);
+        const res = await axios.put("http://localhost:5000/api/book", book,
+            {
+                withCredentials: true
+            });
         alert("book updated successfully !! ");
         handleFetchBook();
-        setbook({ title: "", auther: "", price: "", cartogary: "", publishYear: "",image:"" });
+        setbook({ title: "", auther: "", price: "", cartogary: "", publishYear: "", image: "" });
 
     };
     useEffect(() => {
@@ -62,7 +75,7 @@ const Home = () => {
             <p className="sub-heading">
                 Add, Update and Manage Your Books
             </p>
-            <div style={{ height: " " }}  >
+            <div  className='d-flex flex-column gap-1'>
                 <div>
                     <input type="text" value={book.title} placeholder='title' onChange={(e) => setbook({ ...book, title: e.target.value })} />
                 </div>

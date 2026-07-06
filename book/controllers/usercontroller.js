@@ -26,7 +26,7 @@ export const signIn = async (req, res) => {
     const { email, password } = req.body //puri body dono variable ke ander store kr diya hai 
     const userData = await user.findOne({ email });
     if (!userData) {
-        res.json({ status: false, message: "user not found ! ", })
+       return res.json({ status: false, message: "user not found ! ", })
     }
 
     const isMatch = await bcrypt.compare(password, userData.password);
@@ -39,14 +39,19 @@ export const signIn = async (req, res) => {
             // ye token se ye hoga ki kitne time tak user ka account login rhega agr user 1 hour ke baad profile kholega to usko vaaps se login krna padega.
 
         )
-        res.json({
+        res.cookie("token",token,{//kya ye vahi token hai jo varible bnaaya hai hmne. 
+            httpOnly:true,
+            maxAge:1000*60*60*1,
+            sameSite:"strict"
+        });
+      return  res.json({
             status: true,
             message: "signIn Succesfully !!",
             userData,
             token// idher se token ko return kr diya hai.  
         })
     }
-    res.json({
+   return res.json({
         status: false,
         message: "pasword wrong!!",
 
