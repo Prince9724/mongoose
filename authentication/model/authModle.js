@@ -1,4 +1,4 @@
-import mongooose from "mongoose";
+import mongooose from "mongoose";// import mongoose from mongoose
 
 const authentcationSchema = new mongooose.Schema({
     name:{type:String,required},
