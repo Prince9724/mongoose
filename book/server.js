@@ -5,7 +5,10 @@ import cors from 'cors'
 import cookieParser from "cookie-parser";
 const app = express();
 app.use(express.json());// middleware -> its validate request before sending to the server 
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:5173', // Aapke React app ka URL
+    credentials: true  
+}));
 connectdb();    
 app.use(cookieParser());
 

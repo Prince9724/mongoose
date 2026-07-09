@@ -19,7 +19,7 @@ const Home = () => {
             withCredentials: true
         });
         console.log("Response:", res.data);
-        console.log("Data:", res.data.data);
+        console.log("Data:", res.data);
         setBooks(res.data.data);
     }
 
@@ -105,7 +105,7 @@ const Home = () => {
 
             <div className='book-box'>
                 {
-                    books.map((book, i) => (
+                    books?.map((book, i) => (
                         <div className='book' key={i}>
                             <img src={book.image} alt="" />
                             <p>{book.title || "Not Title provide"}</p>
