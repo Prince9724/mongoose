@@ -1,0 +1,58 @@
+model = >  model ka kaam hota hai mongodb se baat krna iske ander hi schema hota hai. 
+user.create()
+user.findOne()
+user.find()
+ye saare model ki methods hai.
+
+bcrypt ==> password ko encrypt(hash) krta hai.
+suppose user ne 123456 -> database me bhi 123456 gya to hacker ise aasani se dekh skta hai aur aur data chhori kr skta hai.
+isliye bcrypt ise yt@#67hk23hgk4v2ghck5G5K975%8&5.. aisa bna deta hai ab koi bhi original paasword nahi dekh skta hai developer bhi nahi.
+
+JWT - >json web token ye login ke baad identycard bnta hai 
+college -> student -> identycard -> student collegeke ander same 
+login - > JWT token  -> protected Route access
+
+============================================================
+        **Server**
+============================================================
+jab user react me button ko dbaata hai to 
+login button -->data server ko gya -> server check krega --> database me dekhega -> response bhejega 
+ye jo server waala part hai vahi backend hai
+backend ka kaam =>data save krna , login check krna , database se baat krna security handle krna 
+
+
+===============================================================
+                    **Express**
+================================================================
+Express kya hai ==> Express ek nodejs framework hai(ready-made tool ka collection )
+socho tum ek gher bna rhe ho.
+Sab kuch khud banao.
+Eent
+↓
+Cement
+↓
+Door
+↓
+Window
+↓
+Electric
+option .2 => ek builder hire kr lo uske paas sab kuch ready hota hai Express vahi builder hai
+Nodejs ke uper bna hua ek framework 
+=================================
+Node.js aur Express ka Relation
+===================================
+Javascript --> Nodejs -> Expressjs -> our project
+Javascript ke bina Nodejs kuch nahi Aur nodejs ke bina Express.js Kuch bhi nahi 
+===========
+** Agar Express nahi hota  **
+server bnana padta, request handle krni padti,routing likhni padti ,body parse krni padti,sab manualy,
+Express ye sab easy kr deta hai 
+isliye ham likhte hai  
+const app =  express();
+
+
+=================================
+    MVC architecture 
+=================================
+MVC => Model view Controller.
+
