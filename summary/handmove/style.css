@@ -1,0 +1,570 @@
+/* ============================================
+   GLOBAL RESET
+============================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-primary: #0a0a0a;
+    --bg-secondary: #1a1a1a;
+    --bg-glass: rgba(255, 255, 255, 0.05);
+    --border-glass: rgba(255, 255, 255, 0.1);
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0a0;
+    --gold: #D4AF37;
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    --radius: 16px;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+/* HEADER */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 30px;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-glass);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    height: 65px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo .icon {
+    font-size: 28px;
+}
+
+.logo h1 {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.logo h1 span {
+    color: var(--gold);
+}
+
+.header-controls {
+    display: flex;
+    gap: 10px;
+}
+
+.header-controls button {
+    background: var(--bg-glass);
+    border: 1px solid var(--border-glass);
+    color: var(--text-primary);
+    padding: 8px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: all 0.3s ease;
+}
+
+.header-controls button:hover {
+    background: rgba(212, 175, 55, 0.2);
+    border-color: var(--gold);
+    transform: scale(1.05);
+}
+
+/* TOOLBAR */
+.toolbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    padding: 12px 25px;
+    background: rgba(10, 10, 10, 0.92);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-glass);
+    position: fixed;
+    top: 65px;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    flex-wrap: wrap;
+}
+
+.tool-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.tool-section label {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--text-secondary);
+    letter-spacing: 0.5px;
+}
+
+.color-palette {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.color-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.color-btn:hover {
+    transform: scale(1.15);
+    border-color: #fff;
+}
+
+.color-btn.active {
+    border-color: #fff;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+.color-btn.clear-btn {
+    font-size: 16px;
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.color-btn.clear-btn:hover {
+    border-color: #ff4444;
+}
+
+.brush-sizes {
+    display: flex;
+    gap: 6px;
+}
+
+.brush-btn {
+    padding: 5px 14px;
+    border-radius: 20px;
+    border: 1px solid var(--border-glass);
+    background: var(--bg-glass);
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+}
+
+.brush-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.brush-btn.active {
+    background: var(--gold);
+    color: #000;
+    border-color: var(--gold);
+}
+
+.tool-section button {
+    background: var(--bg-glass);
+    border: 1px solid var(--border-glass);
+    color: var(--text-primary);
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.tool-section button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.05);
+}
+
+/* MAIN */
+.main-container {
+    position: fixed;
+    top: 125px;
+    left: 0;
+    right: 0;
+    bottom: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--bg-primary);
+}
+
+.canvas-wrapper {
+    position: relative;
+    width: 90vw;
+    max-width: 1100px;
+    height: calc(100% - 20px);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-glass);
+}
+
+.input-video,
+.drawing-canvas,
+.landmark-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* FIXED: Mirror properly */
+.input-video {
+    transform: scaleX(-1);
+}
+
+.drawing-canvas {
+    z-index: 2;
+    cursor: none;
+}
+
+.landmark-canvas {
+    z-index: 3;
+    pointer-events: none;
+}
+
+/* CUSTOM CURSOR */
+.custom-cursor {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.8), rgba(212, 175, 55, 0.2));
+    border: 2px solid var(--gold);
+    pointer-events: none;
+    z-index: 10;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s, height 0.2s, background 0.2s;
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+    display: none;
+}
+
+.custom-cursor.drawing {
+    width: 30px;
+    height: 30px;
+    background: radial-gradient(circle, rgba(255, 50, 50, 0.8), rgba(255, 50, 50, 0.2));
+    border-color: #ff4444;
+}
+
+/* INSTRUCTIONS */
+.instructions {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 15px 25px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 5;
+    text-align: center;
+    min-width: 200px;
+}
+
+.instructions h3 {
+    color: var(--gold);
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.instructions p {
+    font-size: 11px;
+    color: var(--text-secondary);
+    margin: 2px 0;
+}
+
+/* FOOTER */
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid var(--border-glass);
+    display: flex;
+    align-items: center;
+    padding: 0 30px;
+    z-index: 100;
+}
+
+.status-bar {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+.status-value {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+#fpsDisplay {
+    color: #4CAF50;
+    font-weight: 700;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .header { padding: 10px 15px; height: 55px; }
+    .logo h1 { font-size: 16px; }
+    .toolbar { top: 55px; padding: 10px 15px; gap: 15px; }
+    .tool-section { gap: 8px; }
+    .tool-section label { font-size: 11px; }
+    .color-btn { width: 28px; height: 28px; }
+    .main-container { top: 110px; bottom: 50px; }
+    .footer { height: 50px; padding: 0 15px; }
+    .status-bar { gap: 12px; font-size: 11px; }
+    .canvas-wrapper { width: 95vw; }
+    .header-controls button { padding: 5px 10px; font-size: 14px; }
+    .brush-btn { padding: 3px 10px; font-size: 10px; }
+    .instructions { display: none; }
+}
+
+@media (max-width: 480px) {
+    .toolbar { gap: 8px; }
+    .tool-section { gap: 4px; }
+    .color-btn { width: 24px; height: 24px; }
+    .status-item { font-size: 10px; }
+}   /* Add these at the end of your style.css */
+
+/* ============================================
+   MOBILE OPTIMIZATIONS
+============================================ */
+
+@media (max-width: 768px) {
+    .header {
+        padding: 8px 12px;
+        height: 50px;
+    }
+    
+    .logo h1 {
+        font-size: 14px;
+    }
+    
+    .logo .icon {
+        font-size: 20px;
+    }
+    
+    .header-controls button {
+        padding: 4px 8px;
+        font-size: 14px;
+    }
+    
+    .toolbar {
+        top: 50px;
+        padding: 8px 10px;
+        gap: 8px;
+        overflow-x: auto;
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+    }
+    
+    .tool-section {
+        gap: 4px;
+        flex-shrink: 0;
+    }
+    
+    .tool-section label {
+        font-size: 10px;
+    }
+    
+    .color-btn {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .brush-btn {
+        padding: 3px 10px;
+        font-size: 10px;
+    }
+    
+    .tool-section button {
+        padding: 4px 8px;
+        font-size: 14px;
+    }
+    
+    .main-container {
+        top: 100px;
+        bottom: 50px;
+    }
+    
+    .canvas-wrapper {
+        width: 98vw;
+        border-radius: 8px;
+    }
+    
+    .footer {
+        height: 50px;
+        padding: 0 10px;
+    }
+    
+    .status-bar {
+        gap: 8px;
+        font-size: 10px;
+        justify-content: space-around;
+    }
+    
+    .status-item {
+        font-size: 9px;
+        gap: 4px;
+    }
+    
+    .status-value {
+        font-size: 9px;
+    }
+    
+    .instructions {
+        display: none;
+    }
+    
+    /* Bigger touch targets */
+    .color-btn,
+    .brush-btn,
+    .tool-section button {
+        min-height: 36px;
+        min-width: 36px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        height: 44px;
+        padding: 4px 8px;
+    }
+    
+    .logo h1 {
+        font-size: 12px;
+    }
+    
+    .logo .icon {
+        font-size: 16px;
+    }
+    
+    .header-controls button {
+        padding: 3px 6px;
+        font-size: 12px;
+    }
+    
+    .toolbar {
+        top: 44px;
+        padding: 4px 6px;
+        gap: 4px;
+    }
+    
+    .tool-section {
+        gap: 3px;
+    }
+    
+    .tool-section label {
+        font-size: 8px;
+    }
+    
+    .color-btn {
+        width: 24px;
+        height: 24px;
+        min-width: 24px;
+        min-height: 24px;
+    }
+    
+    .brush-btn {
+        padding: 2px 8px;
+        font-size: 8px;
+    }
+    
+    .main-container {
+        top: 85px;
+        bottom: 44px;
+    }
+    
+    .footer {
+        height: 44px;
+        padding: 0 6px;
+    }
+    
+    .status-bar {
+        gap: 4px;
+        font-size: 8px;
+    }
+    
+    .status-item {
+        font-size: 8px;
+        gap: 2px;
+    }
+    
+    .status-value {
+        font-size: 8px;
+    }
+}
+
+/* Landscape mode fix for mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+    .header {
+        height: 40px;
+        padding: 4px 10px;
+    }
+    
+    .logo h1 {
+        font-size: 14px;
+    }
+    
+    .toolbar {
+        top: 40px;
+        padding: 4px 10px;
+    }
+    
+    .main-container {
+        top: 80px;
+        bottom: 40px;
+    }
+    
+    .footer {
+        height: 40px;
+        padding: 0 10px;
+    }
+    
+    .canvas-wrapper {
+        height: calc(100% - 10px);
+    }
+}
+
+/* Hide cursor on touch devices */
+@media (hover: none) and (pointer: coarse) {
+    .custom-cursor {
+        display: none !important;
+    }
+}

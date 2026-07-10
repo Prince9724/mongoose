@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GestureDraw - AI Hand Drawing</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="logo">
+            <span class="icon">✋</span>
+            <h1>Gesture<span>Draw</span></h1>
+        </div>
+        <div class="header-controls">
+            <button id="fullscreenBtn" title="Fullscreen">⛶</button>
+            <button id="screenshotBtn" title="Screenshot">📸</button>
+            <button id="downloadBtn" title="Download PNG">⬇️</button>
+        </div>
+    </header>
+
+    <!-- TOOLBAR -->
+    <div class="toolbar" id="toolbar">
+        <div class="tool-section">
+            <label>🎨 Colors</label>
+            <div class="color-palette" id="colorPalette">
+                <button class="color-btn active" data-color="#D4AF37" style="background:#D4AF37;"></button>
+                <button class="color-btn" data-color="#2196F3" style="background:#2196F3;"></button>
+                <button class="color-btn" data-color="#4CAF50" style="background:#4CAF50;"></button>
+                <button class="color-btn" data-color="#F44336" style="background:#F44336;"></button>
+                <button class="color-btn" data-color="#FFC107" style="background:#FFC107;"></button>
+                <button class="color-btn" data-color="#000000" style="background:#000000; border:2px solid #555;"></button>
+                <button class="color-btn" data-color="#9C27B0" style="background:#9C27B0;"></button>
+                <button class="color-btn clear-btn" data-color="clear" style="background:transparent; border:2px solid #fff; font-size:18px;">🧹</button>
+            </div>
+        </div>
+
+        <div class="tool-section">
+            <label>🖌️ Brush</label>
+            <div class="brush-sizes" id="brushSizes">
+                <button class="brush-btn" data-size="3">Small</button>
+                <button class="brush-btn active" data-size="8">Medium</button>
+                <button class="brush-btn" data-size="16">Large</button>
+            </div>
+        </div>
+
+        <div class="tool-section">
+            <label>⚡ Actions</label>
+            <button id="undoBtn" title="Undo (Ctrl+Z)">↩️</button>
+            <button id="redoBtn" title="Redo (Ctrl+Y)">↪️</button>
+            <button id="clearBtn" title="Clear All (C)">🗑️</button>
+        </div>
+    </div>
+
+    <!-- MAIN CONTAINER -->
+    <main class="main-container">
+        <div class="canvas-wrapper">
+            <video class="input-video" id="webcam" autoplay playsinline></video>
+            <canvas class="drawing-canvas" id="drawingCanvas"></canvas>
+            <canvas class="landmark-canvas" id="landmarkCanvas"></canvas>
+            <div class="custom-cursor" id="customCursor"></div>
+            
+            <!-- Instruction Overlay -->
+            <div class="instructions" id="instructions">
+                <h3>✋ How to Use</h3>
+                <p>👆 Index Finger = Move Cursor</p>
+                <p>✌️ Index + Middle = Draw</p>
+                <p>🖐️ Open Palm = Pause</p>
+                <p>✊ Fist = Clear</p>
+                <p>🎨 Hover on color for 700ms to select</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="status-bar">
+            <div class="status-item">
+                <span>👋 Gesture:</span>
+                <span id="gestureStatus" class="status-value">Idle</span>
+            </div>
+            <div class="status-item">
+                <span>🎨 Color:</span>
+                <span id="currentColorDisplay" class="status-value" style="background:#D4AF37; width:20px; height:20px; border-radius:50%; display:inline-block; border:2px solid #fff;"></span>
+            </div>
+            <div class="status-item">
+                <span>🖌️ Size:</span>
+                <span id="brushSizeDisplay" class="status-value">8</span>
+            </div>
+            <div class="status-item">
+                <span>⚡ FPS:</span>
+                <span id="fpsDisplay" class="status-value">0</span>
+            </div>
+            <div class="status-item">
+                <span>✏️ Drawing:</span>
+                <span id="drawingStatus" class="status-value">⏸️ Paused</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
