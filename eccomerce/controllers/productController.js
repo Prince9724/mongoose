@@ -33,7 +33,7 @@ export const postProduct = async(req, res)=>{
 }
 export const updateProduct = async(req, res)=>{
     try{
-        const result = await Product.findIdByAndUpdate();
+        const result = await Product.findByIdAndUpdate();
     }
     catch(err){
         res.json({
@@ -45,7 +45,7 @@ export const updateProduct = async(req, res)=>{
 }
 export const deleteProduct = async(req, res)=>{
     try{
-        const result = await Product.findIdByAnd
+        const result = await Product.findByIdAndDelete()
     }
     catch(err){
         res.json({
