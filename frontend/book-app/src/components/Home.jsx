@@ -36,7 +36,8 @@ const Home = () => {
 
         }
         else {
-            alert(res.data.err.message);
+            alert(res.data.err);
+            console.log(res.data.message);
         }
         console.log(res.data)
     }

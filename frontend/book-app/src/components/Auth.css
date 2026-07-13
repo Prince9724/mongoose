@@ -1,0 +1,112 @@
+/* Container styling aur layout */
+.container {
+  max-width: 400px;
+  margin: 60px auto;
+  padding: 40px 30px;
+  background: #1e1e2f;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  font-family: system-ui, -apple-system, sans-serif;
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Heading standard color placeholder */
+.text-white {
+  color: #ffffff;
+  font-size: 28px;
+  margin-bottom: 30px;
+  font-weight: 600;
+}
+
+/* Form layout wrappers */
+.container > div {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Input boxes styling */
+.container input {
+  width: 100%;
+  padding: 14px 16px;
+  background: #2a2a40;
+  border: 1px solid #3f3f5c;
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 15px;
+  outline: none;
+  box-sizing: border-box;
+  transition: all 0.25s ease;
+}
+
+/* Input user interactive focus glow animation */
+.container input:focus {
+  border-color: #6366f1;
+  background: #2d2d48;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+/* Buttons basic resets and common style */
+.container button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Form ke andar ka action button (Add button) */
+.container div div button {
+  background: #6366f1;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+/* Action button interactive hover */
+.container div div button:hover {
+  background: #4f46e5;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
+}
+
+.container div div button:active {
+  transform: translateY(0);
+}
+
+/* Switch link button (Bottom wala wrapper button) */
+.container > div[style*="margin-top"] button {
+  background: transparent;
+  color: #a5b4fc;
+  padding: 5px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Switch button interactive hover */
+.container > div[style*="margin-top"] button:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+/* RESPONSIVE DESIGN (Mobile adjustments) */
+@media (max-width: 480px) {
+  .container {
+    margin: 20px 15px;
+    padding: 30px 20px;
+  }
+  
+  .text-white {
+    font-size: 24px;
+    margin-bottom: 24px;
+  }
+  
+  .container input, 
+  .container button {
+    padding: 12px;
+    font-size: 14px;
+  }
+}

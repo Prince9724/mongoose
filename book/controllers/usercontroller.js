@@ -39,10 +39,10 @@ export const signIn = async (req, res) => {
             // ye token se ye hoga ki kitne time tak user ka account login rhega agr user 1 hour ke baad profile kholega to usko vaaps se login krna padega.
 
         )
+        console.log(token);
         res.cookie("token",token,{//kya ye vahi token hai jo varible bnaaya hai hmne. 
-            httpOnly:true,
             maxAge:1000*60*60*1,
-            sameSite:"strict"
+            httpOnly:true
         });
       return  res.json({
             status: true,

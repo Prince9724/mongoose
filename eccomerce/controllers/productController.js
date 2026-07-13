@@ -22,6 +22,11 @@ export const getProduct = async(req,res)=>{
 export const postProduct = async(req, res)=>{
     try{
         const result = await Product.create(req.body);
+        res.json({
+            status:true,
+            message:"product added successfully !! ",
+            product:result
+        })
     }
     catch(err){
         res.json({
@@ -33,7 +38,12 @@ export const postProduct = async(req, res)=>{
 }
 export const updateProduct = async(req, res)=>{
     try{
-        const result = await Product.findByIdAndUpdate();
+        const result = await Product.findByIdAndUpdate(req.body.id,req.body);
+          res.json({
+            status:true,
+            message:"product updated successfully !! ",
+            product:result
+        })
     }
     catch(err){
         res.json({
@@ -45,7 +55,12 @@ export const updateProduct = async(req, res)=>{
 }
 export const deleteProduct = async(req, res)=>{
     try{
-        const result = await Product.findByIdAndDelete()
+        const result = await Product.findByIdAndDelete(req.params.id)
+          res.json({
+            status:true,
+            message:"product deleted successfully !! ",
+            product:result
+        })
     }
     catch(err){
         res.json({

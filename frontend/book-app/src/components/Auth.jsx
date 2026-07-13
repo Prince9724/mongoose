@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react'
+import './Auth.css';
 import { useNavigate } from 'react-router';
 const Auth = () => {
     const [user, setuser] = useState({
@@ -61,7 +62,7 @@ const Auth = () => {
 
     return (
         <div className='container'>
-            <h1>{isignin ? "Sign Up" : "Sign In"}</h1>
+            <h1 className='text-white'>{isignin ? "Sign Up" : "Sign In"}</h1>
             {
                 isignin ? (<div>
                     <div>
