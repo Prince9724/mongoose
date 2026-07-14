@@ -1,8 +1,17 @@
 import auth from "../model/authModel.js";
-
-export const signIn =async(req, res)=>{
+import bcrypt from 'bcrypt';
+import jsonwebtoken from "jsonwebtoken";
+export const signUn =async(req, res)=>{
     try{
-        const result = await auth.create();
+        const {name,emai}= req.body;
+        const hashed  = await   bcrypt.hash(password,12);
+        
+        const result = await auth.create({name,email,password:hashed});
+        res.json({
+            status:true,
+            message:"signUp successfully !! ",
+            result
+        })
     }
     catch(err){
         res.status(400).json({
@@ -13,9 +22,9 @@ export const signIn =async(req, res)=>{
     }
 }
 
-export const signUp =async(req, res)=>{
+export const signIp =async(req, res)=>{
     try{
-        const result = await auth.findOne();
+        
     }
     catch(err){
         res.status(400).json({
