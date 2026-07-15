@@ -1,0 +1,11 @@
+{
+  "userAuth": [
+    {
+      "name": "Sachin Yadav",
+      "email": "yadavsachin3166@gmail.com",
+      "password": "sachin@#1234",
+      "id": "vLR-2WM-0Fc"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
