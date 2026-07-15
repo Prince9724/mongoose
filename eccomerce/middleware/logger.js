@@ -1,4 +1,7 @@
-const singinValidation = (req, res, next) => {
+import auth from "../model/authModel.js";
+import bcrypt from 'bcrypt';
+
+export const singinValidation = async(req, res, next) => {
     try {
         const {email,password}= req.body
         const user = await auth.findOne({email});// yha sirf email ko find krega
