@@ -47,7 +47,9 @@ const Auth = () => {
     }
 
     const checkUser = async () => {
-        const res = await axios.post("http://localhost:5000/api/book/signin", signin);
+        const res = await axios.post("http://localhost:5000/api/book/signin", signin,{
+            withCredentials:true
+        });
         if (res.data.status) {
             alert(res.data.message)
             clear();//clear function hai jo maine bnaaya hai 

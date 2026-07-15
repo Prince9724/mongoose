@@ -1,204 +1,802 @@
- /* Google Font */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
+/* ============================================
+   GLOBAL RESET & VARIABLES
+============================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-body{
-    background:linear-gradient(135deg,#0f172a,#1e293b,#312e81);
-    min-height:100vh;
+:root {
+    --primary: #6C63FF;
+    --primary-dark: #5a52d5;
+    --primary-light: #8b83ff;
+    --secondary: #FF6584;
+    --bg-dark: #0a0a1a;
+    --bg-card: #14142b;
+    --bg-input: #1a1a35;
+    --text-white: #ffffff;
+    --text-gray: #a0a0c0;
+    --text-muted: #6a6a8a;
+    --shadow: 0 8px 32px rgba(108, 99, 255, 0.2);
+    --shadow-hover: 0 12px 48px rgba(108, 99, 255, 0.35);
+    --radius: 16px;
+    --radius-sm: 10px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Main Container */
-
-.container{
-    width:100%;
-    min-height:100vh;
-    padding:40px;
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--bg-dark);
+    color: var(--text-white);
+    min-height: 100vh;
+    overflow-x: hidden;
 }
 
-/* Form */
-
-.container>div:first-child{
-    width:900px;
-    max-width:95%;
-    margin:auto;
-    background:rgba(255,255,255,.12);
-    backdrop-filter:blur(18px);
-    border:1px solid rgba(255,255,255,.2);
-    border-radius:20px;
-    padding:35px;
-    box-shadow:0 20px 45px rgba(0,0,0,.35);
+/* ============================================
+   CONTAINER
+============================================ */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
 }
 
-.container>div:first-child div{
-    margin-bottom:18px;
+/* Background Glow Effect */
+.container::before {
+    content: '';
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 30% 20%, rgba(108, 99, 255, 0.05), transparent 60%),
+                radial-gradient(circle at 70% 80%, rgba(255, 101, 132, 0.05), transparent 60%);
+    z-index: -1;
+    animation: glowPulse 8s ease-in-out infinite alternate;
 }
 
-.container input{
-    width:100%;
-    height:55px;
-    border:none;
-    outline:none;
-    border-radius:12px;
-    padding:0 18px;
-    font-size:16px;
-    background:rgba(255,255,255,.95);
-    transition:.3s;
+@keyframes glowPulse {
+    0% { transform: scale(1); opacity: 0.5; }
+    100% { transform: scale(1.1); opacity: 1; }
 }
 
-.container input:focus{
-    border:2px solid #7c3aed;
-    box-shadow:0 0 15px rgba(124,58,237,.4);
+/* ============================================
+   HEADINGS
+============================================ */
+.heading {
+    font-size: 3rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: none;
+    margin-bottom: 8px;
+    animation: fadeInDown 0.6s ease;
 }
 
-/* Buttons */
-
-.container button{
-    padding:14px 35px;
-    border:none;
-    border-radius:12px;
-    color:white;
-    font-weight:600;
-    cursor:pointer;
-    transition:.3s;
-    margin-right:15px;
-    margin-top:10px;
+.sub-heading {
+    font-size: 1.1rem;
+    color: var(--text-gray);
+    margin-bottom: 35px;
+    animation: fadeInUp 0.6s ease;
 }
 
-.container button:first-child{
-    background:linear-gradient(90deg,#4f46e5,#7c3aed);
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.container button:last-child{
-    background:linear-gradient(90deg,#ef4444,#f97316);
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.container button:hover{
-    transform:translateY(-3px);
-    box-shadow:0 15px 30px rgba(0,0,0,.3);
+/* ============================================
+   FORM / INPUT FIELDS
+============================================ */
+.d-flex {
+    display: flex;
 }
 
-/* Cards */
-
-.book-box{
-    width:100%;
-    margin-top:50px;
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-    gap:28px;
+.flex-column {
+    flex-direction: column;
 }
 
-.book{
-    background:white;
-    border-radius:18px;
-    overflow:hidden;
-    padding:18px;
-    text-align:center;
-    box-shadow:0 15px 35px rgba(0,0,0,.18);
-    transition:.35s;
+.gap-1 {
+    gap: 12px;
 }
 
-.book:hover{
-    transform:translateY(-8px);
-    box-shadow:0 25px 45px rgba(0,0,0,.28);
+.gap-2 {
+    gap: 20px;
 }
 
-.book img{
-    width:100%;
-    height:280px;
-    object-fit:cover;
-    border-radius:12px;
-    margin-bottom:18px;
+input {
+    width: 380px;
+    padding: 14px 20px;
+    border: 2px solid rgba(108, 99, 255, 0.2);
+    border-radius: var(--radius-sm);
+    background: var(--bg-input);
+    color: var(--text-white);
+    font-size: 15px;
+    transition: var(--transition);
+    outline: none;
 }
 
-.book p{
-    font-size:20px;
-    font-weight:600;
-    color:#111827;
-    margin-bottom:20px;
-    min-height:60px;
+input::placeholder {
+    color: var(--text-muted);
+    font-weight: 300;
 }
 
-/* Remove Button */
-
-.book button{
-    margin:6px;
-    width:90px;
-    height:42px;
-    border:none;
-    border-radius:10px;
-    color:white;
-    cursor:pointer;
-    font-weight:600;
-    transition:.3s;
+input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 25px rgba(108, 99, 255, 0.15);
+    transform: translateY(-2px);
 }
 
-.book button:first-of-type{
-    background:#ef4444;
+input:hover {
+    border-color: rgba(108, 99, 255, 0.4);
 }
 
-.book button:last-of-type{
-    background:#2563eb;
+/* Input with icon effect */
+.input-wrapper {
+    position: relative;
+    width: 380px;
 }
 
-.book button:hover{
-    transform:scale(1.05);
+.input-wrapper input {
+    width: 100%;
+    padding-left: 45px;
 }
 
-/* Scrollbar */
-
-::-webkit-scrollbar{
-    width:8px;
+.input-wrapper .icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 18px;
 }
 
-::-webkit-scrollbar-thumb{
-    background:#7c3aed;
-    border-radius:20px;
+/* ============================================
+   BUTTONS
+============================================ */
+button {
+    padding: 12px 28px;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
 }
 
-/* Responsive */
-
-@media(max-width:768px){
-
-.container{
-    padding:20px;
+/* Primary Button */
+button[onclick*="handlePostBook"],
+button[onclick*="checkUser"],
+button[onclick*="handlePostUser"] {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    box-shadow: var(--shadow);
 }
 
-.container>div:first-child{
-    width:100%;
-    padding:25px;
+button[onclick*="handlePostBook"]:hover,
+button[onclick*="checkUser"]:hover,
+button[onclick*="handlePostUser"]:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
 }
 
-.book img{
-    height:230px;
+button[onclick*="handlePostBook"]:active,
+button[onclick*="checkUser"]:active,
+button[onclick*="handlePostUser"]:active {
+    transform: translateY(0);
 }
 
-.book p{
-    font-size:18px;
+/* Update Button */
+button[onclick*="handleUpdate"] {
+    background: linear-gradient(135deg, #FFB800, #FF8C00);
+    color: white;
+    box-shadow: 0 4px 20px rgba(255, 184, 0, 0.3);
 }
 
-.container button{
-    width:100%;
-    margin-top:12px;
+button[onclick*="handleUpdate"]:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(255, 184, 0, 0.4);
 }
 
-}
-.heading{
-    text-align:center;
-    color:white;
-    font-size:48px;
-    font-weight:700;
-    margin-bottom:10px;
+/* Remove / Delete Button */
+button[onclick*="deleteBook"] {
+    background: linear-gradient(135deg, #FF4757, #FF2D4B);
+    color: white;
+    padding: 8px 18px;
+    font-size: 13px;
 }
 
-.sub-heading{
-    text-align:center;
-    color:#d1d5db;
-    font-size:18px;
-    margin-bottom:35px;
+button[onclick*="deleteBook"]:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 20px rgba(255, 71, 87, 0.4);
+}
+
+/* Edit Button */
+button[onclick*="handleFilled"] {
+    background: linear-gradient(135deg, #2ED573, #1ABC9C);
+    color: white;
+    padding: 8px 18px;
+    font-size: 13px;
+}
+
+button[onclick*="handleFilled"]:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 20px rgba(46, 213, 115, 0.4);
+}
+
+/* Toggle / Switch Button */
+button[onclick*="switchform"] {
+    background: transparent;
+    color: var(--primary-light);
+    border: 2px solid rgba(108, 99, 255, 0.3);
+    padding: 10px 24px;
+    font-size: 14px;
+}
+
+button[onclick*="switchform"]:hover {
+    background: rgba(108, 99, 255, 0.1);
+    border-color: var(--primary);
+    transform: translateY(-2px);
+}
+
+/* Ripple Effect */
+button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+button:active::after {
+    width: 300px;
+    height: 300px;
+}
+
+/* Button Group */
+.button-group {
+    display: flex;
+    gap: 12px;
+    margin-top: 5px;
+    flex-wrap: wrap;
+}
+
+/* ============================================
+   BOOK CARDS
+============================================ */
+.book-box {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 25px;
+    margin-top: 40px;
+    width: 100%;
+    animation: fadeInUp 0.8s ease;
+}
+
+.book {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    padding: 20px 18px 25px;
+    border: 1px solid rgba(108, 99, 255, 0.1);
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+}
+
+.book::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary), var(--primary));
+    background-size: 300% 300%;
+    border-radius: var(--radius);
+    z-index: -1;
+    opacity: 0;
+    transition: var(--transition);
+    animation: borderGlow 3s ease-in-out infinite;
+}
+
+@keyframes borderGlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.book:hover::before {
+    opacity: 1;
+}
+
+.book:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: var(--shadow-hover);
+}
+
+.book img {
+    width: 140px;
+    height: 190px;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    margin-bottom: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: var(--transition);
+}
+
+.book:hover img {
+    transform: scale(1.05);
+}
+
+.book p {
+    font-size: 14px;
+    color: var(--text-gray);
+    margin: 3px 0;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.book p:first-of-type {
+    font-weight: 700;
+    color: var(--text-white);
+    font-size: 16px;
+    white-space: normal;
+    min-height: 48px;
+}
+
+.book .book-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Book Badge */
+.book .badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: var(--secondary);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ============================================
+   AUTH PAGE SPECIFIC
+============================================ */
+.text-white {
+    color: var(--text-white);
+}
+
+.mt-0 {
+    margin-top: 0;
+}
+
+/* Auth Container */
+.auth-container {
+    max-width: 440px;
+    width: 100%;
+    padding: 40px 35px;
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    border: 1px solid rgba(108, 99, 255, 0.1);
+    box-shadow: var(--shadow);
+    animation: fadeInUp 0.6s ease;
+}
+
+.auth-container h1 {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 2rem;
+}
+
+.auth-container .input-group {
+    margin-bottom: 16px;
+}
+
+.auth-container input {
+    width: 100%;
+}
+
+.auth-container .auth-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.auth-container .auth-actions button {
+    width: 100%;
+}
+
+.auth-container .toggle-auth {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* ============================================
+   ANIMATIONS
+============================================ */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+.floating {
+    animation: float 3s ease-in-out infinite;
+}
+
+/* Loading Skeleton */
+.skeleton {
+    background: linear-gradient(90deg, var(--bg-input) 25%, var(--bg-card) 50%, var(--bg-input) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: var(--radius-sm);
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* Toast / Notification */
+.toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bg-card);
+    color: var(--text-white);
+    padding: 14px 30px;
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(108, 99, 255, 0.2);
+    box-shadow: var(--shadow-hover);
+    backdrop-filter: blur(20px);
+    z-index: 9999;
+    animation: slideUp 0.5s ease;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+/* ============================================
+   SCROLLBAR
+============================================ */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-dark);
+}
+
+/* ============================================
+   RESPONSIVE
+============================================ */
+
+/* Tablet */
+@media (max-width: 992px) {
+    .heading {
+        font-size: 2.4rem;
+    }
+
+    .book-box {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 20px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px 15px;
+    }
+
+    .heading {
+        font-size: 2rem;
+    }
+
+    .sub-heading {
+        font-size: 0.95rem;
+    }
+
+    input {
+        width: 100%;
+        max-width: 380px;
+        padding: 12px 16px;
+        font-size: 14px;
+    }
+
+    .input-wrapper {
+        width: 100%;
+        max-width: 380px;
+    }
+
+    button {
+        padding: 10px 20px;
+        font-size: 13px;
+    }
+
+    .book-box {
+        grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+        gap: 15px;
+    }
+
+    .book {
+        padding: 15px 12px 18px;
+    }
+
+    .book img {
+        width: 100px;
+        height: 140px;
+    }
+
+    .book p {
+        font-size: 12px;
+    }
+
+    .book p:first-of-type {
+        font-size: 14px;
+        min-height: 40px;
+    }
+
+    .button-group {
+        flex-direction: column;
+        width: 100%;
+        max-width: 380px;
+    }
+
+    .button-group button {
+        width: 100%;
+    }
+
+    .auth-container {
+        padding: 30px 20px;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+    .heading {
+        font-size: 1.6rem;
+    }
+
+    .book-box {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 12px;
+    }
+
+    .book img {
+        width: 80px;
+        height: 110px;
+    }
+
+    .book p {
+        font-size: 11px;
+    }
+
+    .book p:first-of-type {
+        font-size: 12px;
+        min-height: 34px;
+    }
+
+    button[onclick*="deleteBook"],
+    button[onclick*="handleFilled"] {
+        padding: 6px 12px;
+        font-size: 11px;
+    }
+
+    .auth-container h1 {
+        font-size: 1.5rem;
+    }
+}
+
+/* ============================================
+   DARK MODE (Already Dark)
+============================================ */
+
+/* ============================================
+   UTILITY CLASSES
+============================================ */
+.text-center {
+    text-align: center;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.mt-10 {
+    margin-top: 10px;
+}
+
+.mt-20 {
+    margin-top: 20px;
+}
+
+.mb-10 {
+    margin-bottom: 10px;
+}
+
+.mb-20 {
+    margin-bottom: 20px;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.align-center {
+    align-items: center;
+}
+
+/* ============================================
+   EMPTY STATE
+============================================ */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-muted);
+}
+
+.empty-state .empty-icon {
+    font-size: 4rem;
+    margin-bottom: 15px;
+    opacity: 0.5;
+}
+
+.empty-state h3 {
+    font-size: 1.3rem;
+    color: var(--text-gray);
+    margin-bottom: 8px;
+}
+
+.empty-state p {
+    font-size: 0.95rem;
+}
+
+/* ============================================
+   LOADING SPINNER
+============================================ */
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(108, 99, 255, 0.1);
+    border-top: 4px solid var(--primary);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ============================================
+   SUCCESS / ERROR BADGES
+============================================ */
+.badge-success {
+    background: #2ED573;
+    color: white;
+    padding: 2px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.badge-error {
+    background: #FF4757;
+    color: white;
+    padding: 2px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+/* ============================================
+   FORM GROUP WITH LABEL
+============================================ */
+.form-group {
+    margin-bottom: 16px;
+    width: 100%;
+    max-width: 380px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-gray);
+    letter-spacing: 0.5px;
+}
+
+.form-group input {
+    width: 100%;
+}
+
+/* ============================================
+   RESPONSIVE GRID IMPROVEMENTS
+============================================ */
+@media (max-width: 576px) {
+    .form-group {
+        max-width: 100%;
+    }
+    
+    input {
+        max-width: 100%;
+    }
+    
+    .button-group {
+        max-width: 100%;
+    }
 }
