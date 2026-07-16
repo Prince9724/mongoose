@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 
 export const singinValidation = async(req, res, next) => {
     try {
-        const {email,password}= req.body
+        const {name,email,password}= req.body
         const user = await auth.findOne({email});// yha sirf email ko find krega
        
         if (!user) {

@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt';
 import jwt from "jsonwebtoken";
 export const signUp = async (req, res) => {
     console.log(typeof auth);
+    const {email,password}= req.body
     const already = await auth.findOne({ email });
 
     if (already) {

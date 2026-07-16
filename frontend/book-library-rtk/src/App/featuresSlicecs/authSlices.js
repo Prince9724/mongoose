@@ -83,7 +83,7 @@ const authSlice = createSlice({
     })
 
     .addCase(userPost.rejected,(state,action)=>{
-
+        
         state.loading=false;
 
         state.error=action.payload.message;

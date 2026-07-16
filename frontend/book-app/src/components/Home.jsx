@@ -76,7 +76,7 @@ const Home = () => {
             <p className="sub-heading">
                 Add, Update and Manage Your Books
             </p>
-            <div  className='d-flex flex-column gap-1'>
+            <div className='d-flex flex-column gap-1'>
                 <div>
                     <input type="text" value={book.title} placeholder='title' onChange={(e) => setbook({ ...book, title: e.target.value })} />
                 </div>
@@ -112,14 +112,16 @@ const Home = () => {
                             <p>{book.title || "Not Title provide"}</p>
                             <p>{book.author || "Not author provide"}</p>
                             <p>{book.price || "Not price provide"}</p>
-                            <button onClick={() => {
-                                deleteBook(book._id);
-                            }}>remove</button>
-                            <button className='' onClick={() => {
-                                handleFilled(book)
-                            }}>
-                                edit
-                            </button>
+                            <div className='d-flex gap-2'>
+                                <button onClick={() => {
+                                    deleteBook(book._id);
+                                }}>remove</button>
+                                <button className='' onClick={() => {
+                                    handleFilled(book)
+                                }}>
+                                    edit
+                                </button>
+                            </div>
                         </div>
                     ))
                 }
