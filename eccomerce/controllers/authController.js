@@ -69,8 +69,9 @@ export const signIn = async (req, res) => {
 export const sendOtp = async(req , res)=>{
     try{
         const otp = generatorOtp();
+
        await transporter.sendMail({
-                from:process.env.USEEMAIL,
+                from:``,
                 to:req.body.email,
                 subject:"OTP veriication ",
                 text:`Your OTP is ,${otp} its expire in 20 min !`
