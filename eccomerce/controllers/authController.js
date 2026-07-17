@@ -1,6 +1,9 @@
 import auth from "../model/authModel.js";
 import bcrypt from 'bcrypt';
 import jwt from "jsonwebtoken";
+import dotenv  from "dotenv";
+import { generatorOtp, transporter } from "./otpController.js";
+
 export const signUp = async (req, res) => {
     console.log(typeof auth);
     const {email,password}= req.body
@@ -62,3 +65,26 @@ export const signIn = async (req, res) => {
         });
     }
 }
+
+export const sendOtp = async(req , res)=>{
+    try{
+        const otp = generatorOtp();
+       await transporter.sendMail({
+                from:process.env.USEEMAIL,
+                to:req.body.email,
+                subject:"OTP veriication ",
+                text:`Your OTP is ,${otp} its expire in 20 min !`
+        })
+        res.status(200).json({
+            status:true,
+            message:"OTP send Successfully !!"
+        })
+    }
+    catch(err){
+         res.status(400).json({
+            status: false,
+            message: "can't send otp !!",
+            err: err.message
+        });
+    }   
+}//sachinkhrate2004@gmail.com

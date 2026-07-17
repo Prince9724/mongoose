@@ -26,7 +26,7 @@ export const signIn = async (req, res) => {
     const { email, password } = req.body //puri body dono variable ke ander store kr diya hai 
     const userData = await user.findOne({ email });
     if (!userData) {
-       return res.json({ status: false, message: "user not found ! ", })
+        return res.json({ status: false, message: "user not found ! ", })
     }
 
     const isMatch = await bcrypt.compare(password, userData.password);
@@ -40,21 +40,37 @@ export const signIn = async (req, res) => {
 
         )
         console.log(token);
-        res.cookie("token",token,{//kya ye vahi token hai jo varible bnaaya hai hmne. 
-            maxAge:1000*60*60*1,
-            httpOnly:true
+        res.cookie("token", token, {//kya ye vahi token hai jo varible bnaaya hai hmne. 
+            maxAge: 1000 * 60 * 60 * 1,
+            httpOnly: true
         });
-      return  res.json({
+        return res.json({
             status: true,
             message: "signIn Succesfully !!",
             userData,
             token// idher se token ko return kr diya hai.  
         })
     }
-   return res.json({
+    return res.json({
         status: false,
         message: "pasword wrong!!",
 
     })
 }
-//
+export const getUser = async (req, res) => {
+    try {
+        const result =await user.find(req.body);
+        res.json({
+            status: true,
+            message: "user fetch successfully !! ",
+            result
+        })
+    }
+    catch (err) {
+        res.json({
+            status: false,
+            message: "pasword wrong!!",
+            err:err.message
+        })
+    }
+}
