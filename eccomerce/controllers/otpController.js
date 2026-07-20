@@ -11,5 +11,5 @@ export const transporter = nodemailer.createTransport({
 });
 
 export const generatorOtp = ()=>{
-    return Math.floor(100000 + Math.random()*900000)
+    return Math.floor(100000 + Math.random()*900000);
 }
