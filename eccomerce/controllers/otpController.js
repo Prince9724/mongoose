@@ -13,3 +13,4 @@ export const transporter = nodemailer.createTransport({
 export const generatorOtp = ()=>{
     return Math.floor(100000 + Math.random()*900000);
 }
+//"email":"patilvidhya773@gmail.com",

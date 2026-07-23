@@ -71,7 +71,7 @@ export const sendOtp = async (req, res) => {
     try {
         const otp = generatorOtp();
         
-        const expiry = new Date(Date.now() + 1000 * 60)//otp send hone ke baad generate hota hai 
+        const expiry = new Date(Date.now() + 1000 * 60*2)//otp send hone ke baad generate hota hai 
         await OTP.create({ email: req.body.email, otp, expiry })
         await transporter.sendMail({
             from: `"foogle" <${process.env.USEEMAIL}>`,
@@ -95,7 +95,7 @@ export const sendOtp = async (req, res) => {
 export const otpVerify = async (req, res) => {
     try {
         const {email , otp} = req.body// otp aur wemail ko body se nikal ke store kiya hai 
-        const result =  await OTP.find({email, otp })//jiska bhi email aur otp dono match lr rha ho vo result name ke variable ke ander store hai 
+        const result =  await OTP.findOne({email, otp })//jiska bhi email aur otp dono match lr rha ho vo result name ke variable ke ander store hai 
         if(!result){//database se email ya otp nhi match hota hai to ye condition chlega !! 
                  res.status(400).json({
             status: false,
@@ -122,7 +122,7 @@ export const otpVerify = async (req, res) => {
        
     }
     catch (err) {
-        res.status(400).json({
+        res.status(500).json({
             status: false,
             message: "can't verify otp !!",
             err: err.message
