@@ -3,9 +3,9 @@ import bcrypt from 'bcrypt';
 import jwt from "jsonwebtoken"
 export const signUp = async (req, res) => {
     try {
-        const { email, password, name } = req.body
-        const hash = await bcrypt.hash(password, 10)
-        const result = await auth.create(
+        const { email, password, name } = req.body//email password name body se get kiya hai 
+        const hash = await bcrypt.hash(password, 10)//password hashing kiya hua hai 
+        const result = await auth.create(//user create kr rha hu 
             {
                 email,
                 password: hash,
@@ -30,10 +30,10 @@ export const signUp = async (req, res) => {
 export const signIn = async (req, res) => {
     try {
 
-        const { email, password, name } = req.body
+        const { email, password, name } = req.body//email password name body se get kiya hai 
 
-        const result = await auth.findOne({ email })
-        if (!result) {
+        const result = await auth.findOne({ email })//findone reust ke ander email ko search kr ke store kiya hua hai 
+        if (!result) {//agar result me 
             res.json({
                 status: false,
                 message: "email invalid  !!",
@@ -49,8 +49,8 @@ export const signIn = async (req, res) => {
             })
         }
         const token = jwt.sign({
-            email:auth.email,
-            name: auth.name
+            email:result.email,
+            name: result.name
         }, "!@#$%^&*()", { expiresIn: "1h" });
         res.cookie("token", token, {
             httpOnly: true,
@@ -60,8 +60,8 @@ export const signIn = async (req, res) => {
             status: true,
             message: "user SignIn succesfully",
             user: {
-                name: auth.name,
-                email: auth.email,
+                name: result.name,
+                email: result.email,
                 password: auth.password
             }
         })
@@ -76,7 +76,7 @@ export const signIn = async (req, res) => {
 }
 export const getprofile = async (req, res) => {
     try {
-        const user = await auth.findOne({ email: req.body.email })
+        const user = await auth.findOne({ email: req.user.email })
         res.json({
             status: true,
             message: "user profile fetched succesfully !!",

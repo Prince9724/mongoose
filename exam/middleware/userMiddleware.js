@@ -1,10 +1,10 @@
 import jwt from 'jsonwebtoken'
 export const tokenMiddleware = (req , res , next)=>{
-    const token = req.cookies.token;
+    const token = req.cookies.token;//cookies me se token ko toke me store kiya 
 
      
-    if (!token) {
-        return res.json({
+    if (!token) { //agar token nahi hai to 
+         res.json({
             status: false,
             message: "user login required"
         });
@@ -12,14 +12,14 @@ export const tokenMiddleware = (req , res , next)=>{
     try{    
 
         
-        if (!token) {
-            return res.json({
+        if (!token) {//token mising hai to 
+             res.json({
                 status: false,
                 message: "Token missing !!"
             });
         }   
-        const cookieVerify = jwt.verify(token,"!@#$%^&*()")
-        req.auth = cookieVerify;
+        const cookieVerify = jwt.verify(token,"!@#$%^&*()")//cookie ko verify krne ke liye 
+        req.user = cookieVerify;//cookie auth me store kr rha hu 
         next();
     }
     catch(err){
