@@ -2,7 +2,7 @@ import Product from "../model/productModel.js";//import hua hai model me se hua 
 
 export const getProduct = async(req,res)=>{
     try{
-       const result =  await Product.find();
+       const result =  await Product.find({});
        res.status(200).json({
         status:true,
         message:"Product fetching succesfully !! ",

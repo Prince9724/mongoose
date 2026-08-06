@@ -15,5 +15,17 @@ Router.delete("/",deleteProduct);
 Router.post("/signin",singinValidation,signIn);
 Router.post("/signup",signUp);
 Router.post("/sendOtp",sendOtp);
-Router.post("/otpverify",otpVerify);
+Router.post("/otpverify",
+
+
+
+
+
+
+
+
+
+
+
+);
 export default Router;
