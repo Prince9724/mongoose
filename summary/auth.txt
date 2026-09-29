@@ -56,3 +56,15 @@ const app =  express();
 =================================
 MVC => Model view Controller.
 
+  {
+      "userId": 12,
+      "name": "pooja",
+      "contact": "1000000011",
+      "reason": "",
+      "type": "casual",
+      "start": "2026-05-08",
+      "end": "2026-05-10",
+      "days": 3,
+      "status": "approved",
+      "id": 1
+    },
